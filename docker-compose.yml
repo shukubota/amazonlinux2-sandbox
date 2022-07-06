@@ -6,3 +6,9 @@ services:
     build: .
     tty: true
     platform: linux/x86_64
+  localstack:
+    image: localstack/localstack
+    ports:
+      - "14566:4566"
+    environment:
+      - SERVICES=${SERCICES-sqs,sns,s3}
