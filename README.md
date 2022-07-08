@@ -15,5 +15,6 @@ aws s3 create-bucket --bucket test  --endpoint=http://localhost:14566
 でbucket作成
 
 ```
-aws ls --endpoint=http://localhost:14566
+aws s3 ls --endpoint=http://localhost:14566
 ```
+で確認
