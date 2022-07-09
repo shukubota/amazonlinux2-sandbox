@@ -9,6 +9,9 @@ services:
   localstack:
     image: localstack/localstack
     ports:
-      - "14566:4566"
+      - "4566:4566"
     environment:
       - SERVICES=${SERCICES-sqs,sns,s3}
+      - DATA_DIR=/tmp/localstack/data
+    volumes: 
+      - ./localstack:/tmp/localstack
