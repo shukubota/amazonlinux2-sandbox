@@ -2,17 +2,26 @@ version: 2.1
 orbs:
   localstack: localstack/platform@1.0
 jobs:
-  run-integration-tests:
+  run-localstack-setup:
     executor: localstack/default
     steps:
       - localstack/startup
       - run:
-          command: awslocal sqs create-queue --queue-name segment
+        command: awslocal sqs create-queue --queue-name segment
       - run:
-          command: awslocal sqs get-queue-attributes --attribute-names All --queue-url=segment
+        command: awslocal sqs get-queue-attributes --attribute-names All --queue-url=segment
       - run:
-          command: echo "queue list"
+        command: echo "queue list"
+  run-test:
+    docker:
+      - image: cimg/go:1.18
+    steps:
+      - checkout
+      - run: go version 
 workflows:
+  integration-setup:
+    jobs:
+      - run-localstack-setup
   integration-test:
     jobs:
-      - run-integration-tests
+      - run-test
