@@ -18,3 +18,8 @@ aws s3 create-bucket --bucket test  --endpoint=http://localhost:14566
 aws s3 ls --endpoint=http://localhost:14566
 ```
 で確認
+
+## sqs
+```
+aws sqs list-queues --endpoint-url=http://localhost:4566 --profile=localstack
+```
