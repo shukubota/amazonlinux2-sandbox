@@ -17,7 +17,8 @@ jobs:
       - image: cimg/go:1.18
     steps:
       - checkout
-      - run: go version 
+      - run:
+        command: go version 
 workflows:
   integration-setup:
     jobs:
