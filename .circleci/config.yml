@@ -7,18 +7,18 @@ jobs:
     steps:
       - localstack/startup
       - run:
-        command: awslocal sqs create-queue --queue-name segment
+          command: awslocal sqs create-queue --queue-name segment
       - run:
-        command: awslocal sqs get-queue-attributes --attribute-names All --queue-url=segment
+          command: awslocal sqs get-queue-attributes --attribute-names All --queue-url=segment
       - run:
-        command: echo "queue list"
+          command: echo "queue list"
   run-test:
     docker:
       - image: cimg/go:1.18
     steps:
       - checkout
       - run:
-        command: go version 
+          command: go version 
 workflows:
   integration-setup:
     jobs:
