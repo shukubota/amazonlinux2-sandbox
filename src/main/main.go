@@ -18,5 +18,8 @@ func Enqueue() error {
 	}
 
 	err = s.GetList()
+	if err != nil {
+		return err
+	}
 	return nil
 }
