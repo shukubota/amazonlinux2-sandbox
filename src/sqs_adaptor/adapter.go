@@ -24,25 +24,40 @@ func NewAdapter() (*Adapter, error) {
 	}, nil
 }
 
-func (s *Adapter) SendMessageToQueue() {
+func (s *Adapter) Enqueue(queueName string, message string) error {
 	fmt.Println("sendMessage")
+	input := &sqs.SendMessageInput{
+		QueueUrl:    aws.String(queueName),
+		MessageBody: aws.String(message),
+	}
+	output, err := s.sqs.SendMessage(input)
+	if err != nil {
+		return err
+	}
+
+	fmt.Println(output)
+	return nil
 }
 
-func (s *Adapter) Dequeue() {
+func (s *Adapter) Dequeue(queueName string) ([]*sqs.Message, error) {
 	fmt.Println("aaa")
+	input := &sqs.ReceiveMessageInput{
+		QueueUrl: aws.String(queueName),
+	}
+	output, err := s.sqs.ReceiveMessage(input)
+	if err != nil {
+		return nil, err
+	}
+	return output.Messages, nil
 }
 
-func (s *Adapter) GetList() error {
+func (s *Adapter) GetQueue(queueName string) error {
 	fmt.Println("getlist")
 	input := &sqs.GetQueueAttributesInput{
 		AttributeNames: []*string{aws.String("All")},
-		QueueUrl:       aws.String("prepared"),
+		QueueUrl:       aws.String(queueName),
 	}
 	m, err := s.sqs.GetQueueAttributes(input)
-	fmt.Println("---------------")
-	fmt.Println(m)
-	fmt.Println(err)
-	fmt.Println("---------------")
 	if err != nil {
 		return err
 	}
