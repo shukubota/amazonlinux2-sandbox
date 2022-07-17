@@ -9,7 +9,7 @@ jobs:
       - run:
           command: awslocal sqs create-queue --queue-name segment
       - run:
-          command: awslocal sqs get-queue-attributes --attribute-names All --queue-url=segment
+          command: awslocal sqs get-queue-attributes --attribute-names All --queue-url=prepared
       - run:
           command: echo "queue list"
   run-test:
