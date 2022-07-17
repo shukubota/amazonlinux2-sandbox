@@ -12,21 +12,15 @@ type Adapter struct {
 }
 
 func NewAdapter() (*Adapter, error) {
-	region := "us-east-1"
 	sess, err := session.NewSession(&aws.Config{
-		Region:   aws.String(region),
+		Region:   aws.String("ap-northeast-1"),
 		Endpoint: aws.String("localhost.localstack.cloud:4566"),
 	})
 	if err != nil {
 		return nil, err
 	}
-
-	adapter := sqs.New(sess)
-	fmt.Println(adapter)
-
-	//fmt.Println(sqs_service)
 	return &Adapter{
-		sqs: adapter,
+		sqs: sqs.New(sess),
 	}, nil
 }
 
