@@ -7,9 +7,7 @@ jobs:
     steps:
       - localstack/startup
       - run:
-          command: awslocal sqs create-queue --queue-name prepared
-      - run:
-          command: awslocal sqs get-queue-attributes --attribute-names All --queue-url=prepared
+          command: awslocal sqs create-queue --queue-name prepared --region=ap-northeast-1
       - run:
           command: echo "queue list"
   run-test:
