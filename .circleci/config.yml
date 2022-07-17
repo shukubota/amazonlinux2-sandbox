@@ -1,6 +1,11 @@
 version: 2.1
 orbs:
   localstack: localstack/platform@1.0
+
+commands:
+  setup:
+    - run:
+        command: sudo apt install python3-pip && sudo pip3 install awscli
 jobs:
   run-localstack-setup:
     executor: localstack/default
@@ -17,10 +22,11 @@ jobs:
       - image: cimg/go:1.18
     steps:
       - checkout
+      - setup
       - run:
-          command: docker-compose up -f docker-compose.yml
+          command: docker-compose -f docker-compose.yml up
       - run:
-          command: awslocal sqs create-queue --queue-name prepared --region=ap-northeast-1
+          command: aws sqs create-queue --queue-name prepared3 --region ap-northeast-1 --endpoint http://localhost:4566
       - run:
           command: go test ./src/main/... -v
 workflows:
