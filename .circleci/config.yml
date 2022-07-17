@@ -4,11 +4,11 @@ jobs:
     docker:
       - image: cimg/go:1.18
         auth:
-          username: umibows
+          username: $DOCKERHUB_USERNAME
           password: $DOCKERHUB_PASSWORD
       - image: localstack/localstack:1.0.0
         auth:
-          username: umibows
+          username: $DOCKERHUB_USERNAME
           password: $DOCKERHUB_PASSWORD
     steps:
       - checkout
