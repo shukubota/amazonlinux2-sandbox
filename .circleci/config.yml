@@ -7,7 +7,7 @@ jobs:
     steps:
       - localstack/startup
       - run:
-          command: awslocal sqs create-queue --queue-name segment
+          command: awslocal sqs create-queue --queue-name prepared
       - run:
           command: awslocal sqs get-queue-attributes --attribute-names All --queue-url=prepared
       - run:
