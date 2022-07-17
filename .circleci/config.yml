@@ -32,6 +32,9 @@ jobs:
           username: umibows
           password: $DOCKERHUB_PASSWORD
       - image: localstack/default
+        auth:
+          username: umibows
+          password: $DOCKERHUB_PASSWORD
     steps:
       - checkout
       - setup
