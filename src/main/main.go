@@ -2,20 +2,21 @@ package main
 
 import (
 	"fmt"
-	"github.com/shukubota/amazonlinux2-sandbox/src/sqs"
+	adaptor "github.com/shukubota/amazonlinux2-sandbox/src/sqs_adaptor"
 )
 
 func main() {
 	Enqueue()
 }
 
-func Enqueue() {
+func Enqueue() error {
 	fmt.Println("testしたい")
-	s, err := sqs.NewAdapter()
+	s, err := adaptor.NewAdapter()
 	if err != nil {
 		fmt.Println(err)
-		return
+		return err
 	}
 
-	s.SendMessageToQueue()
+	err = s.GetList()
+	return nil
 }
