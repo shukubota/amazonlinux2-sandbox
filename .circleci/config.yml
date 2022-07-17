@@ -4,8 +4,9 @@ orbs:
 
 commands:
   setup:
-    - run:
-        command: sudo apt install python3-pip && sudo pip3 install awscli
+    steps:
+      - run:
+          command: sudo apt install python3-pip && sudo pip3 install awscli
 jobs:
   run-localstack-setup:
     executor: localstack/default
