@@ -39,11 +39,16 @@ func (s *Adapter) Dequeue() {
 }
 
 func (s *Adapter) GetList() error {
+	fmt.Println("getlist")
 	input := &sqs.GetQueueAttributesInput{
 		AttributeNames: []*string{aws.String("All")},
 		QueueUrl:       aws.String("prepared"),
 	}
 	m, err := s.sqs.GetQueueAttributes(input)
+	fmt.Println("---------------")
+	fmt.Println(m)
+	fmt.Println(err)
+	fmt.Println("---------------")
 	if err != nil {
 		return err
 	}
