@@ -17,7 +17,7 @@ jobs:
   run-localstack-setup:
     docker:
       - image: cimg/go:1.18
-      - image: localstack/default
+      - image: localstack/localstack:1.0.0
     steps:
       - run:
           command: awslocal sqs create-queue --queue-name prepared --region=ap-northeast-1
