@@ -6,7 +6,7 @@ commands:
   setup:
     steps:
       - run:
-          command: audo apt-get update && sudo apt install python3-pip && sudo pip3 install awscli
+          command: sudo apt-get update && sudo apt install python3-pip && sudo pip3 install awscli
 jobs:
   run-localstack-setup:
     executor: localstack/default
