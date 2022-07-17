@@ -28,6 +28,9 @@ jobs:
   run-test:
     docker:
       - image: cimg/go:1.18
+      auth:
+        username: umibows
+        password: $DOCKERHUB_PASSWORD
       - image: localstack/default
     steps:
       - checkout
