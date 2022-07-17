@@ -14,7 +14,7 @@ type Adapter struct {
 func NewAdapter() (*Adapter, error) {
 	sess, err := session.NewSession(&aws.Config{
 		Region:   aws.String("ap-northeast-1"),
-		Endpoint: aws.String("localhost.localstack.cloud:4566"),
+		Endpoint: aws.String("http://localhost:4566"),
 	})
 	if err != nil {
 		return nil, err
