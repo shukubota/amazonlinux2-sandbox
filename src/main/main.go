@@ -10,7 +10,6 @@ func main() {
 }
 
 func Enqueue() error {
-	fmt.Println("testしたい")
 	s, err := adaptor.NewAdapter()
 	if err != nil {
 		fmt.Println(err)
