@@ -8,18 +8,16 @@ commands:
       - run:
           command: sudo apt-get update && sudo apt install python3-pip && sudo pip3 install awscli
 
-executors:
-  default:
-    machine:
-      image: cimg/go:1.18
-  container:
-    docker:
-      image: localstack/default
+#executors:
+#  default:
+#    machine: cimg/go:1.18
+#  container:
+#    docker: localstack/default
 jobs:
   run-localstack-setup:
-    executor: localstack/default
+    - image: cimg/go:1.18
+    - image: localstack/default
     steps:
-      - localstack/startup
       - run:
           command: awslocal sqs create-queue --queue-name prepared --region=ap-northeast-1
       - run:
@@ -27,7 +25,8 @@ jobs:
       - run:
           command: echo "queue list"
   run-test:
-    executor: default
+    - image: cimg/go:1.18
+    - image: localstack/default
     steps:
       - checkout
       - setup
@@ -40,9 +39,9 @@ jobs:
       - run:
           command: go test ./src/main/... -v
 workflows:
-  integration-setup:
-    jobs:
-      - run-localstack-setup
+#  integration-setup:
+#    jobs:
+#      - run-localstack-setup
   integration-test:
     jobs:
       - run-test
