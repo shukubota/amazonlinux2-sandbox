@@ -7,12 +7,10 @@ services:
     tty: true
     platform: linux/x86_64
   localstack:
-    image: localstack/localstack
+    image: localstack/localstack:1.0.0
     ports:
       - "4566:4566"
     environment:
-      - SERVICES=s3,sqs
-      - DATA_DIR=/tmp/localstack/data
-      - DEFAULT_REGION=ap-northeast-1
+      SQS_ENDPOINT_STRATEGY: path
     volumes: 
-      - ./localstack:/tmp/localstack
+      - ./localstack:/var/lib/localstack
