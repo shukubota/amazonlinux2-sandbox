@@ -31,7 +31,7 @@ jobs:
         auth:
           username: umibows
           password: $DOCKERHUB_PASSWORD
-      - image: localstack/default
+      - image: localstack/localstack:1.0.0
         auth:
           username: umibows
           password: $DOCKERHUB_PASSWORD
