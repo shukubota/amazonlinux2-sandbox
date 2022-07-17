@@ -6,19 +6,52 @@ import (
 )
 
 func main() {
-	Enqueue()
+	err := Main()
+	fmt.Println(err)
 }
 
-func Enqueue() error {
-	s, err := adaptor.NewAdapter()
+func Main() error {
+	err := SendMessageToSQS("test")
 	if err != nil {
-		fmt.Println(err)
 		return err
 	}
-
-	err = s.GetList()
+	_, err = ReceiveMessageFromSQS()
 	if err != nil {
 		return err
 	}
 	return nil
+}
+
+const queueName = "prepared"
+
+func SendMessageToSQS(message string) error {
+	s, err := adaptor.NewAdapter()
+	if err != nil {
+		return err
+	}
+
+	err = s.Enqueue(queueName, message)
+	if err != nil {
+		return err
+	}
+	return nil
+}
+
+func ReceiveMessageFromSQS() (string, error) {
+	s, err := adaptor.NewAdapter()
+	if err != nil {
+		return "", err
+	}
+
+	messages, err := s.Dequeue(queueName)
+	if err != nil {
+		return "", err
+	}
+
+	if len(messages) == 0 {
+		return "", nil
+	}
+
+	message := *messages[0].Body
+	return message, nil
 }

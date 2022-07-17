@@ -6,9 +6,15 @@ import (
 	"testing"
 )
 
-func TestEnqueue(t *testing.T) {
+func TestEnqueueAndDeQueue(t *testing.T) {
 	t.Run("enqueue", func(t *testing.T) {
-		err := main.Enqueue()
+		err := main.SendMessageToSQS("test message")
 		assert.NoError(t, err)
+
+		var message string
+		message, err = main.ReceiveMessageFromSQS()
+		assert.NoError(t, err)
+
+		assert.Equal(t, message, "test message")
 	})
 }
