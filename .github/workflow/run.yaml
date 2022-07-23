@@ -1,0 +1,7 @@
+name: actions
+on: [push]
+jobs:
+  health-check:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "healthy"
