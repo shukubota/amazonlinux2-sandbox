@@ -1,16 +1,12 @@
-version: "3.9"
+version: "3.8"
 
 services:
-  backend:
-    container_name: amazonlinux2-compose-container
-    build: .
-    tty: true
-    platform: linux/x86_64
   localstack:
     image: localstack/localstack:1.0.0
     ports:
       - "4566:4566"
     environment:
       SQS_ENDPOINT_STRATEGY: path
+      SERVICES: sqs
     volumes: 
-      - ./localstack:/var/lib/localstack
+      - ./volume:/var/lib/localstack
