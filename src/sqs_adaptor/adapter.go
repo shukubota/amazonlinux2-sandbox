@@ -25,11 +25,11 @@ func NewAdapter() (*Adapter, error) {
 }
 
 func (s *Adapter) Enqueue(queueName string, message string) error {
-	input := &sqs.SendMessageInput{
+	i := &sqs.SendMessageInput{
 		QueueUrl:    aws.String(queueName),
 		MessageBody: aws.String(message),
 	}
-	_, err := s.sqs.SendMessage(input)
+	_, err := s.sqs.SendMessage(i)
 	if err != nil {
 		return err
 	}
@@ -40,11 +40,11 @@ func (s *Adapter) Dequeue(queueName string) ([]*sqs.Message, error) {
 	input := &sqs.ReceiveMessageInput{
 		QueueUrl: aws.String(queueName),
 	}
-	output, err := s.sqs.ReceiveMessage(input)
+	o, err := s.sqs.ReceiveMessage(input)
 	if err != nil {
 		return nil, err
 	}
-	return output.Messages, nil
+	return o.Messages, nil
 }
 
 func (s *Adapter) GetQueue(queueName string) error {
