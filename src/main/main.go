@@ -1,21 +1,25 @@
 package main
 
 import (
-	"fmt"
 	adaptor "github.com/shukubota/amazonlinux2-sandbox/src/sqs_adaptor"
+	"log"
 )
 
 func main() {
-	err := Main()
-	fmt.Println(err)
+	log.Fatal(Main())
 }
 
 func Main() error {
-	err := SendMessageToSQS("test")
+	s, err := adaptor.NewAdapter()
 	if err != nil {
 		return err
 	}
-	_, err = ReceiveMessageFromSQS()
+	message := "生殺与奪の権を他人に握らせるな!!"
+	err = SendMessageToSQS(s, message)
+	if err != nil {
+		return err
+	}
+	_, err = ReceiveMessageFromSQS(s)
 	if err != nil {
 		return err
 	}
@@ -24,25 +28,15 @@ func Main() error {
 
 const queueName = "prepared"
 
-func SendMessageToSQS(message string) error {
-	s, err := adaptor.NewAdapter()
-	if err != nil {
-		return err
-	}
-
-	err = s.Enqueue(queueName, message)
+func SendMessageToSQS(s *adaptor.Adapter, message string) error {
+	err := s.Enqueue(queueName, message)
 	if err != nil {
 		return err
 	}
 	return nil
 }
 
-func ReceiveMessageFromSQS() (string, error) {
-	s, err := adaptor.NewAdapter()
-	if err != nil {
-		return "", err
-	}
-
+func ReceiveMessageFromSQS(s *adaptor.Adapter) (string, error) {
 	messages, err := s.Dequeue(queueName)
 	if err != nil {
 		return "", err
