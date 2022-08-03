@@ -17,6 +17,8 @@ jobs:
     steps:
       - checkout
       - run:
+          command: echo "<< pipeline.parameters.deploy_type >>"
+      - run:
           command: sudo apt-get update && sudo apt install python3-pip && sudo pip3 install awscli
       - run:
           command: aws sqs create-queue --queue-name prepared --region ap-northeast-1 --endpoint http://localhost:4566
