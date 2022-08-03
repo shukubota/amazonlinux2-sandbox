@@ -1,4 +1,8 @@
 version: 2.1
+parameters:
+  deploy_type:
+    type: string
+    default: ""
 jobs:
   run-test:
     docker:
