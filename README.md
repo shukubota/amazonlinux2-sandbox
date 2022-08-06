@@ -23,3 +23,15 @@ aws s3 ls --endpoint=http://localhost:14566
 ```
 aws sqs list-queues --endpoint-url=http://localhost:4566 --profile=localstack
 ```
+
+### circleci api
+例
+```sh
+curl -u token: -X POST --header "Content-Type: application/json" -d '{
+  "parameters": {},
+  "branch": "main"
+}' https://circleci.com/api/v2/project/gh/shukubota/amazonlinux2-sandbox/pipeline
+```
+
+branchを指定できる
+tokenはhttps://app.circleci.com/settings/user/tokensから指定できる.
