@@ -27,6 +27,7 @@ jobs:
       - run:
           command: |
             echo test
+            git rev-parse HEAD
             TEST=aaa
             echo $TEST
             echo $TEST2
