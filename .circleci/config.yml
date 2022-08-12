@@ -33,6 +33,7 @@ jobs:
             source .circleci/environment.sh $TEST
             
             echo $TEST2
+            echo $TEST
 workflows:
   integration-test:
     jobs:
