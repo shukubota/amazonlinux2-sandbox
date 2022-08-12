@@ -30,8 +30,8 @@ jobs:
             TEST=aaa
             echo $TEST
             echo $TEST2
-            source .circleci/environment.sh $TEST
-            
+            source .circleci/environment.sh
+            echo 99999
             echo $TEST2
             echo $TEST
 workflows:
