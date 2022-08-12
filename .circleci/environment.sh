@@ -1,5 +1,5 @@
 TMP=$1
 
-echo TMP
+echo $TMP
 export TEST2=${TMP}
 export TEST=testupdate
