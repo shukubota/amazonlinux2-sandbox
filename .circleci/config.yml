@@ -24,6 +24,11 @@ jobs:
           command: aws sqs create-queue --queue-name prepared --region ap-northeast-1 --endpoint http://localhost:4566
       - run:
           command: go test ./src/main/... -v
+      - run:
+          command: |
+            echo test
+            TEST=aaa
+            echo $TEST
 workflows:
   integration-test:
     jobs:
