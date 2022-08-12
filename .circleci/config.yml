@@ -29,7 +29,8 @@ jobs:
             echo test
             TEST=aaa
             echo $TEST
-            bash .circleci/environment.sh
+            source .circleci/environment.sh $TEST
+            
             echo $TEST
 workflows:
   integration-test:
