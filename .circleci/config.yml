@@ -3,6 +3,9 @@ parameters:
   deploy_type:
     type: string
     default: ""
+  dry_run_mode:
+    type: boolean
+    default: false
 jobs:
   run-test:
     docker:
@@ -18,6 +21,14 @@ jobs:
       - checkout
       - run:
           command: echo "<< pipeline.parameters.deploy_type >>"
+      - run:
+          command: |
+            echo "<< pipeline.parameters.dry_run_mode >>"
+            DRY_RUN_MODE=<< pipeline.parameters.dry_run_mode >>
+            if ! "${DRY_RUN_MODE}"; then
+              echo OK
+            fi
+            echo END
       - run:
           command: sudo apt-get update && sudo apt install python3-pip && sudo pip3 install awscli
       - run:
