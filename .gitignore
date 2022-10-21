@@ -2,3 +2,5 @@ localstack
 .idea
 volume
 jenkins/jenkins_home
+
+development/database/
