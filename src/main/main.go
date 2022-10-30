@@ -14,7 +14,7 @@ func Main() error {
 	if err != nil {
 		return err
 	}
-	message := "生殺与奪の権を他人に握らせるな!!"
+	message := "aaa"
 	err = SendMessageToSQS(s, message)
 	if err != nil {
 		return err
